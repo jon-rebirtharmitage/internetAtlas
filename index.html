@@ -105,14 +105,18 @@
     
     <script>
         $.ajax({
-             url:"http://www.broadbandmap.gov/broadbandmap/broadband/jun2014/wireline?latitude=42.456&longitude=-74.987",
-             dataType: 'jsonp', // Notice! JSONP <-- P (lowercase)
+            url: "http://www.broadbandmap.gov/broadbandmap/broadband/jun2014/wireline?latitude=40.7195898&longitude=-73.9998334&format=json",
+            //coordinates?latitude=42.456&longitude=-74.987&format=json
+            dataType: "jsonp",
+        	callbackParameter: "jsoncallback",
+            timeout: 5000,
+             
              success:function(json){
                  // do stuff with json (in this case an array)
                  alert("Success");
              },
-             error:function(){
-                 alert("Error");
+             error:function( jqXHR, textstatus, errorThrown){
+                 alert("Error " + jqXHR.status + "  " + errorThrown);
              }      
         });
     </script>
@@ -120,7 +124,10 @@
 
 
     <!-- /.container -->
-
+    <script type="text/javascript" 
+         src="http://jquery-jsonp.googlecode.com/files/jquery.jsonp-1.0.4.min.js">
+    </script>
+    
     <!-- jQuery --> 
     <script src="js/jquery.js"></script>
 
