@@ -19,6 +19,7 @@
     <!-- Custom CSS -->
     <link href="css/internetatlas.css" rel="stylesheet">
 
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <!-- Gov APO Key  bhnKf81FrVPMHpmGw3QYgC3TsovarLZl0qlS6X3k -->
 </head>
 
@@ -103,7 +104,7 @@
     </script>
     
     <script type="text/javascript">
-    
+
     function pullData(){
         var settings = {
           "async": true,
@@ -114,7 +115,8 @@
         }
         
         $.ajax(settings).done(function (response) {
-          alert("This worked");
+          console.log(response);
+          alert("Something happened.");
         });
     }
     </script>
