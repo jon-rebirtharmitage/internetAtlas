@@ -65,6 +65,8 @@
             </div>
         </div>
         
+        <ul class="my-new-list"></ul>
+        
         <form class="form-inline" role="form">
                 
             <div class="col-md-6 col-sm-12">
@@ -102,27 +104,19 @@
     
     <script type="text/javascript">
     
-    var api = "bhnKf81FrVPMHpmGw3QYgC3TsovarLZl0qlS6X3k";
-    var baseUrl = "http://www.broadbandmap.gov/broadbandmap/demographic/2014/coordinates?latitude=42.456&longitude=-74.987&format=json"
-    
-    $('#action-button').click(function() {
-        angular.module("myapp", [])
-        .controller("MyController", function($scope, $http) {
-            $scope.myData = {};
-            $scope.myData.doClick = function(item, event) {
-
-                $http.jsonp('http://www.broadbandmap.gov/broadbandmap/speedtest/state/names/alabama?callback=JSON_CALLBACK&format=json').
-                  success(function(data, status, headers, config) {
-                    alert("This worked");
-                  }).
-                  error(function(data, status, headers, config) {
-                    alert("GFDM");
-                  });
-            }
-
-
-        } );
-    });
+    function pullData(){
+        var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "http://www.broadbandmap.gov/broadbandmap/broadband/jun2014/wireless?latitude=40.7195898&longitude=-73.9998334&format=json",
+          "method": "GET",
+          "headers": {}
+        }
+        
+        $.ajax(settings).done(function (response) {
+          console.log(response);
+        });
+    }
     </script>
     <!-- /.container -->
 

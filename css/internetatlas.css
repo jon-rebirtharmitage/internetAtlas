@@ -1,0 +1,23 @@
+body {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	background: none;
+	color:white;
+}
+
+.full {
+  background: url(http://4walled.cc/src/c0/c033b28886a3436757c8527d77360f80.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.buffered{
+	margin-top:25px;
+}
+
+.micro-buffered{
+	margin-top:25px;
+	max-width:75px;
+}
