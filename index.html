@@ -1,9 +1,9 @@
-
+  
 <!DOCTYPE html>
 <html class="full" lang="en" ng-app>
 <!-- Make sure the <html> tag is set to the .full CSS class. Change the background image in the full.css file. -->
 
-<head>
+<head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -108,15 +108,14 @@
             url: "http://www.broadbandmap.gov/broadbandmap/broadband/jun2014/wireline?latitude=40.7195898&longitude=-73.9998334&format=json",
             //coordinates?latitude=42.456&longitude=-74.987&format=json
             dataType: "jsonp",
-        	callbackParameter: "jsoncallback",
             timeout: 5000,
              
-             success:function(json){
+             success:function(response){
                  // do stuff with json (in this case an array)
                  alert("Success");
              },
              error:function( jqXHR, textstatus, errorThrown){
-                 alert("Error " + jqXHR.status + "  " + errorThrown);
+                 alert("Error " + jqXHR.status + "  " + textstatus);
              }      
         });
     </script>
