@@ -11,44 +11,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{{.Title}}</title>
+    <title>InternetAtlas.IO</title>
 
     <!-- Bootstrap Core CSS -->
-    <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <style>
-			body {
-				margin-top: 50px;
-				margin-bottom: 50px;
-				background: none;
-				color:white;
-			}
-
-			.full {
-			  background: url(http://4walled.cc/src/c0/c033b28886a3436757c8527d77360f80.jpg) no-repeat center center fixed; 
-			  -webkit-background-size: cover;
-			  -moz-background-size: cover;
-			  -o-background-size: cover;
-			  background-size: cover;
-			}
-
-			.buffered{
-				margin-top:25px;
-			}
-
-			.micro-buffered{
-				margin-top:25px;
-				max-width:75px;
-			}
-	</style>
+    <link href="/css/internetatlas.css" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <!-- Gov APO Key  bhnKf81FrVPMHpmGw3QYgC3TsovarLZl0qlS6X3k -->
@@ -109,14 +78,16 @@
                     <input type="text" placeholder="State" class="form-control micro-buffered" ng-model="item.state">
                   </div>
                   <button ng-click="add()" class="btn btn-primary buffered">Add Address</button>
-                  <button type="submit"  ng-click="res()" id="action-button" class="btn btn-primary buffered">Compare</button>
+                  <button type="submit" onClick="" id="action-button" class="btn btn-primary buffered">Compare</button>
                 </div>
             </div>
             
         </div>
     </div>
-	
-	<script type="text/javascript">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
+    
+    <script type="text/javascript">
 
       var Note = function($scope){
         $scope.items = [];
@@ -128,36 +99,80 @@
             state:""
           });
         };
-		 
-		$scope.res = function () {
-			var str = "";
-			if ($scope.items.length < 10){
-				for(var i = 0; i < $scope.items.length; i++) {
-					str = str + "`" + $scope.items[i].address + "`" + $scope.items[i].city + "`" + $scope.items[i].state + "~";
-					alert(str);
-				}
-				$.get("http://www.rebirtharmitage.com:8081/hello/" + str);
-			}else{
-				alert("Too many items!")
-			}
-
-		}
       }
 
     </script>
-	
-	<script>
-	
-		function masterplan(){
-			alert("The master plan was started.");
-			$.get("http://www.rebirtharmitage.com:8080/hello/jcronin")
-		}
-		
-	</script>
-	
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
     
+    <script>
+        //Create session ID and connect to MongoDB and create temp table
+        function startUp(){
+            var j = 32;
+            var sessionID = "";
+            var picker = "abcdefghijklmnopstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()";
+            for (var i = 0; i <= j; i++){
+                sessionID = sessionID + picker[Math.floor((Math.random() * 62) + 1)];
+            }
+            
+            loadSession();
+        }      
+        
+        function loadSession(){
+                $(function(){
+                    $.ajax({
+                      url: 'http://vpn.rebirtharmitage.com:21701',
+                      type: 'get',
+                      dataType: 'jsonp',
+                      jsonp: 'jsonp', // mongod is expecting the parameter name to be called "jsonp"
+                      success: function (data) {
+                        console.log('success', data);
+                      },
+                      error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log('error', errorThrown);
+                      }
+                    });
+                  });
+        }  
+    </script>
+    
+
+    
+    <script>
+
+                $.ajax({
+                      url: 'http://vpn.rebirtharmitage.com:21701/test',
+                      type: 'get',
+                      dataType: 'jsonp',
+                      jsonp: 'jsonp', // mongod is expecting the parameter name to be called "jsonp"
+                      success: function (data) {
+                        alert('success', data);
+                      },
+                      error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert('error', textStatus, errorThrown);
+                      }
+                    });
+    /*
+        $.ajax({
+            url: "http://www.broadbandmap.gov/broadbandmap/broadband/jun2014/wireline?latitude=40.7195898&longitude=-73.9998334&format=jsonp",
+            data: "{}",
+            dataType: "jsonp",
+            timeout: 5000,
+            async: false,
+             
+             success:function(response){
+                 alert("Success");
+                 //This will call function to put this into temp data store
+             },
+             error:function( jqXHR, textstatus, errorThrown){
+                 alert("Error " + jqXHR.responseText + "  " + textstatus);
+             },
+             onComplete:function(response){
+                 
+             }
+        });*/
+    </script>
+    
+
+
     <!-- /.container -->
     <script type="text/javascript" 
          src="http://jquery-jsonp.googlecode.com/files/jquery.jsonp-1.0.4.min.js">
