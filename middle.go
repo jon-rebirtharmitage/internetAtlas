@@ -87,7 +87,7 @@ func wirelessServiceCall(input geocode) (string){
 
 	a := strconv.FormatFloat(input.lat, 'f', -1, 64)
 	b := strconv.FormatFloat(input.lng, 'f', -1, 64)
-	url := "http://www.broadbandmap.gov/broadbandmap/broadband/jun2014/wireless?latitude=" + a + "longitude=" + b + "&format=json"
+	url := "http://www.broadbandmap.gov/broadbandmap/broadband/jun2014/wireline?latitude=" + a + "&longitude=" + b + "&format=json"
 	fmt.Println(url)
 	req, _ := http.NewRequest("GET", url, nil)
 
