@@ -1,0 +1,19 @@
+.full {
+  background: url(http://4walled.cc/src/c0/c033b28886a3436757c8527d77360f80.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.title {
+	color:white;	
+}
+.buffered{
+	margin-top:25px;
+}
+
+.micro-buffered{
+	margin-top:25px;
+	max-width:75px;
+}
