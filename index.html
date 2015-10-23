@@ -23,34 +23,39 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <!-- Custom CSS -->
-    <style>
-			body {
-				margin-top: 50px;
-				margin-bottom: 50px;
-				background: none;
-				color:white;
-			}
-			.full {
-			  background: url(http://4walled.cc/src/c0/c033b28886a3436757c8527d77360f80.jpg) no-repeat center center fixed; 
-			  -webkit-background-size: cover;
-			  -moz-background-size: cover;
-			  -o-background-size: cover;
-			  background-size: cover;
-			}
-			.buffered{
-				margin-top:25px;
-			}
-			.micro-buffered{
-				margin-top:25px;
-				max-width:75px;
-			}
-	</style>
-
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <!-- Gov APO Key  bhnKf81FrVPMHpmGw3QYgC3TsovarLZl0qlS6X3k -->
 </head>
 
-<body onload="startUp()">
+<style>
+@font-face {
+	font-family: Biko;
+	src: url('fonts/CG.otf');
+}
+body {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	background: none;
+	color:white;
+	font-family: Biko;
+}
+.full {
+  background: url('img/int.png') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.buffered{
+	margin-top:25px;
+}
+.micro-buffered{
+	margin-top:25px;
+	max-width:75px;
+}
+</style>
+
+<body>
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
@@ -88,28 +93,26 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-12">
-                <h1>Internet Atlas</h1>
-                <p>Discover more about your interwebs then just the pipes.</p></p>
+                <h1 class="header1">Internet Atlas</h1>
+                <p>Discover more about your interwebs then just the pipes.</p>
             </div>
         </div>
-        
-        <ul class="my-new-list"></ul>
-        
-        <form class="form-inline" role="form">
+
                 
             <div class="col-md-6 col-sm-12">
-                <div ng-controller="Note">
-                  <div ng-repeat="item in items">
-                    <input type="text" placeholder="Address" class="form-control buffered" ng-model="item.address">
-                    <input type="text" placeholder="City" class="form-control buffered" ng-model="item.city">
-                    <input type="text" placeholder="State" class="form-control micro-buffered" ng-model="item.state">
-                  </div>
-                  <button ng-click="add()" class="btn btn-primary buffered">Add Address</button>
-                  <button type="submit"  ng-click="res()" id="action-button" class="btn btn-primary buffered">Compare</button>
+	            <form class="form-inline" role="form">
+                    <div ng-controller="Note">
+                      <div ng-repeat="item in items">
+                        <input type="text" placeholder="Address" class="form-control buffered" ng-model="item.address">
+                        <input type="text" placeholder="City" class="form-control buffered" ng-model="item.city">
+                        <input type="text" placeholder="State" class="form-control micro-buffered" ng-model="item.state">
+                      </div>
+                      <button ng-click="add()" class="btn btn-primary buffered">Add Address</button>
+                      <button type="submit"  ng-click="res()" id="action-button" class="btn btn-primary buffered">Compare</button>
+                 	</form>
                 </div>
-            </div>
-            
-        </div>
+			</div>
+</div>
     </div>
 	
 	<script type="text/javascript">
@@ -142,7 +145,7 @@
 	
 		function masterplan(){
 			alert("The master plan was started.");
-			$.get("http://www.rebirtharmitage.com:8080/hello/jcronin")
+			$.get("http://www.rebirtharmitage.com:8081/hello/jcronin")
 		}
 		
 	</script>
