@@ -111,10 +111,10 @@ body {
         </div>
 
                 
-            <div class="col-md-6 col-sm-12 input-side">
-	            <form class="form-inline" role="form">
+            <div class="col-sm-12 input-side">
+	            <form class="form-inline col-md-6 col-lg-12" role="form">
                     <div ng-controller="Note">
-                      <div ng-repeat="item in items">
+                      <div class="col-lg-6 col-lg-offset-1" ng-repeat="item in items">
                         <input type="text" placeholder="Address" class="form-control buffered" ng-model="item.address">
                         <input type="text" placeholder="City" class="form-control buffered" ng-model="item.city">
                         <input type="text" placeholder="State" class="form-control micro-buffered" ng-model="item.state">
@@ -123,9 +123,6 @@ body {
                       <button type="submit"  ng-click="res()" id="action-button" class="btn btn-primary buffered">Compare</button>
            	  </form>
       </div>
-</div>
-	<div class="col-md-6 col-sm-12">
-
 </div>
     </div>
 </div>
