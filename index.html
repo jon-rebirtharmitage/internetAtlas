@@ -32,6 +32,9 @@
 	font-family: Biko;
 	src: url('fonts/CG.otf');
 }
+
+@import url(https://fonts.googleapis.com/css?family=PT+Sans);
+
 body {
 	margin-top: 50px;
 	margin-bottom: 50px;
@@ -52,6 +55,9 @@ body {
 .micro-buffered{
 	margin-top:25px;
 	max-width:75px;
+}
+.input-side {
+	font-family: 'PT Sans', sans-serif;
 }
 </style>
 
@@ -99,7 +105,7 @@ body {
         </div>
 
                 
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-6 col-sm-12 input-side">
 	            <form class="form-inline" role="form">
                     <div ng-controller="Note">
                       <div ng-repeat="item in items">
