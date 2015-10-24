@@ -125,7 +125,7 @@ body {
               <form class="form-inline col-md-6 col-lg-12" role="form">
                     <div>
                         <div class="col-lg-offset-0 col-lg-12 text-center" ng-repeat="item in items">
-                            <input type="text" placeholder="Address" class="form-control macro-buffered" ng-model="item.address">
+                            <input type="text" placeholder="Address" class="form-control buffered" ng-model="item.address">
                             <input type="text" placeholder="City" class="form-control buffered" ng-model="item.city">
                             <input type="text" placeholder="State" class="form-control micro-buffered" ng-model="item.state">
                       </div>
@@ -135,21 +135,6 @@ body {
 </div>
     </div>
 </div>
-</div>
-
-<!-- Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Modal header</h3>
-    </div>
-    <div class="modal-body">
-        <p>One fine body…</p>
-    </div>
-    <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button class="btn btn-primary">Save changes</button>
-    </div>
 </div>
 	
 	<script type="text/javascript">
@@ -163,7 +148,7 @@ body {
 					state:""
 				  });
 			} else {
-				$('#myModal').modal('toggle');	
+				alert("Thats one too many for this app.")	
 			}
         };
 		 
