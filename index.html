@@ -18,12 +18,18 @@
 
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<link href="jQueryAssets/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
+	<link href="jQueryAssets/jquery.ui.theme.min.css" rel="stylesheet" type="text/css">
+	<link href="jQueryAssets/jquery.ui.progressbar.min.css" rel="stylesheet" type="text/css">
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <!-- Custom CSS -->
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="jQueryAssets/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src="jQueryAssets/jquery.ui-1.10.4.progressbar.min.js" type="text/javascript"></script>
+    
     <!-- Gov APO Key  bhnKf81FrVPMHpmGw3QYgC3TsovarLZl0qlS6X3k -->
 </head>
 
@@ -115,21 +121,29 @@ body {
                       </div>
                       <button ng-click="add()" class="btn btn-primary buffered">Add Address</button>
                       <button type="submit"  ng-click="res()" id="action-button" class="btn btn-primary buffered">Compare</button>
-                 	</form>
-                </div>
-			</div>
+           	  </form>
+      </div>
+</div>
+	<div class="col-md-6 col-sm-12">
+
 </div>
     </div>
+</div>
+</div>
 	
 	<script type="text/javascript">
       var Note = function($scope){
         $scope.items = [];
         $scope.add = function () {
-          $scope.items.push({ 
-            address: "",
-            city:"",
-            state:""
-          });
+			if ($scope.items.length < 9) {
+				$scope.items.push({ 
+					address: "",
+					city:"",
+					state:""
+				  });
+			} else {
+				alert("Thats one too many for this app.")	
+			}
         };
 		 
 		$scope.res = function () {
@@ -169,7 +183,17 @@ body {
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
-
+<script type="text/javascript">
+$(function() {
+	$( "#Progressbar1" ).progressbar(); 
+});
+$(function() {
+	$( "#Progressbar1" ).progressbar(); 
+});
+$(function() {
+	$( "#Progressbar2" ).progressbar(); 
+});
+</script>
 </body>
 
 </html>
