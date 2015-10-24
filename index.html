@@ -108,13 +108,13 @@ body {
     </nav>
 
     <!-- Page Content -->
-    <div class="container">
+    <div class="container" ng-controller="Note">
         <div class="row">
           <div class="col-md-6 col-sm-12">
                 <h1 class="header1">Internet Atlas</h1>
                 <p>Discover more about your interwebs then just the pipes.</p>
             </div>
-          <div class="col-md-6 col-sm-12 text-right" ng-controller="Note">
+          <div class="col-md-6 col-sm-12 text-right" >
             <button ng-click="add()" class="btn btn-primary buffered">Add Address</button>
             <button type="submit"  ng-click="res()" id="action-button" class="btn btn-primary buffered">Compare</button>
            </div>
@@ -123,11 +123,11 @@ body {
                 
             <div class="col-sm-12 input-side">
               <form class="form-inline col-md-6 col-lg-12" role="form">
-                    <div ng-controller="Note">
-                  <div class="col-lg-offset-0 col-lg-12 text-center" ng-repeat="item in items">
-                        <input type="text" placeholder="Address" class="form-control buffered" ng-model="item.address">
-                        <input type="text" placeholder="City" class="form-control buffered" ng-model="item.city">
-                        <input type="text" placeholder="State" class="form-control micro-buffered" ng-model="item.state">
+                    <div>
+                        <div class="col-lg-offset-0 col-lg-12 text-center" ng-repeat="item in items">
+                            <input type="text" placeholder="Address" class="form-control buffered" ng-model="item.address">
+                            <input type="text" placeholder="City" class="form-control buffered" ng-model="item.city">
+                            <input type="text" placeholder="State" class="form-control micro-buffered" ng-model="item.state">
                       </div>
                       
            	  </form>
