@@ -83,7 +83,7 @@ func geocoding(input address) (geocode){
 	return geo
 }
 
-func wirelessServiceCall(input geocode) (string){
+func wireServiceCall(input geocode) (string){
 
 	a := strconv.FormatFloat(input.lat, 'f', -1, 64)
 	b := strconv.FormatFloat(input.lng, 'f', -1, 64)

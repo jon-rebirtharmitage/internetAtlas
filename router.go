@@ -2,7 +2,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gorilla/mux"
+	"github.com/julienschmidt/httprouter"
 	"html/template"
     "net/http"
 )
@@ -16,7 +16,7 @@ func (p *Page) GOFUNC(){
 	fmt.Println("HOLY FREAKING CRAP")
 }
 
-func Index(w http.ResponseWriter, r *http.Request) {
+func Index(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
     //a := wirelessServiceCall()
 	//b := geocoding()
     //mongo_i("Test", "Holy shit", "Did this work.")
@@ -27,27 +27,30 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 
-func Hello(w http.ResponseWriter, r *http.Request) {
-/* 	m := parseAddresses(ps.ByName("name"))
+func Process(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	m := parseAddresses(ps.ByName("Value"))
 	for k := range m{
 		b := geocoding(m[k])
-		c := wirelessServiceCall(b)
+		c := wireServiceCall(b)
 		fmt.Println(c)
-	} */
-    //fmt.Fprintf(w, "hello, %s!\n", ps.ByName("name"))
+	} 
 }
 
 func loadPage_Index(title string) (*Page, error){
         return &Page{Title: title, Body: "blank..."}, nil
 }
 
-var router = mux.NewRouter()
+
 
 func main() {
-    router.HandleFunc("/", Index)
-    router.HandleFunc("/hello", Hello).Methods("GET")
+	router := httprouter.New()
+    router.GET("/", Index)
+	router.GET("/Process/:Value", Process)
 	
-    router.PathPrefix("/").Handler(http.FileServer(http.Dir("../internetatlas/")))
+    router.ServeFiles("/js/*filepath", http.Dir("/home/jcronin/internetatlas/js"))
+	router.ServeFiles("/css/*filepath", http.Dir("/home/jcronin/internetatlas/css"))
+	router.ServeFiles("/fonts/*filepath", http.Dir("/home/jcronin/internetatlas/fonts"))
+	router.ServeFiles("/img/*filepath", http.Dir("/home/jcronin/internetatlas/img"))
 	
 	http.Handle("/", router)
 	http.ListenAndServe(":8081", nil)
