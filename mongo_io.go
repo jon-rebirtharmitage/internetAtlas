@@ -1,12 +1,12 @@
- package main
+package main
 
 import (
-		"gopkg.in/mgo.v2"
-		"gopkg.in/mgo.v2/bson"
+	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 	"strconv"
 )
 
-func mongo_i(session_id string, name string, value string){
+func mongo_i(session_id string, w Wireless){
         
         session, err := mgo.Dial("vpn.rebirtharmitage.com:21701")
         if err != nil {
@@ -19,7 +19,7 @@ func mongo_i(session_id string, name string, value string){
         
         c := session.DB("intatl").C(session_id)
 
-        c.Insert(bson.M{"key": name, "value": value})
+	c.Insert(bson.M{"BroadbandSource": w.Results.BroadbandSource})
 }
 
 func mongo_j(session_id string, id string, value geocode){

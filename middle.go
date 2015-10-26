@@ -15,6 +15,47 @@ type geocode struct{
 	lat, lng float64
 }
 
+type Wireless struct {
+	Results struct {
+		BroadbandSource struct {
+			Organization    string `json:"organization"`
+			OrganizationURL string `json:"organizationURL"`
+			StateFips       string `json:"stateFips"`
+		} `json:"broadbandSource"`
+		WirelineServices []struct {
+			BlockFIPS            string `json:"blockFIPS"`
+			DoingBusinessAs      string `json:"doingBusinessAs"`
+			Frn                  string `json:"frn"`
+			HoldingCompanyName   string `json:"holdingCompanyName"`
+			HoldingCompanyNumber string `json:"holdingCompanyNumber"`
+			ProviderName         string `json:"providerName"`
+			ProviderURL          string `json:"providerURL"`
+			Technologies         []struct {
+				DownloadQuality                float32 `json:"downloadQuality"`
+				MaximumAdvertisedDownloadSpeed float32 `json:"maximumAdvertisedDownloadSpeed"`
+				MaximumAdvertisedUploadSpeed   float32 `json:"maximumAdvertisedUploadSpeed"`
+				MaximumDownloadScore           float32 `json:"maximumDownloadScore"`
+				MaximumProviderScore           float32 `json:"maximumProviderScore"`
+				MaximumSpeedScore              float32 `json:"maximumSpeedScore"`
+				MaximumTechnologyScore         float32 `json:"maximumTechnologyScore"`
+				MaximumUploadScore             float32 `json:"maximumUploadScore"`
+				OverallQuality                 float32 `json:"overallQuality"`
+				ProviderQuality                float32 `json:"providerQuality"`
+				SpeedQuality                   float32 `json:"speedQuality"`
+				TechnologyCode                 float32 `json:"technologyCode"`
+				TechnologyQuality              float32 `json:"technologyQuality"`
+				TypicalDownloadSpeed           float32 `json:"typicalDownloadSpeed"`
+				TypicalUploadSpeed             float32 `json:"typicalUploadSpeed"`
+				UploadQuality                  float32 `json:"uploadQuality"`
+			} `json:"technologies"`
+		} `json:"wirelineServices"`
+	} `json:"Results"`
+	Message      []interface{} `json:"message"`
+	ResponseTime int           `json:"responseTime"`
+	Status       string        `json:"status"`
+}
+
+
 func geocoding(input address) (geocode){
 	url := "https://maps.googleapis.com/maps/api/geocode/json?address=" + input.street + "," + input.city + "," + input.state + "&key=AIzaSyAd4WHqblWQ2ac4JMf0yOZfBsIkvOlKRQo"
 
@@ -83,7 +124,7 @@ func geocoding(input address) (geocode){
 	return geo
 }
 
-func wireServiceCall(input geocode) (string){
+func wireServiceCall(input geocode) ([]Wireless){
 
 	a := strconv.FormatFloat(input.lat, 'f', -1, 64)
 	b := strconv.FormatFloat(input.lng, 'f', -1, 64)
@@ -100,69 +141,25 @@ func wireServiceCall(input geocode) (string){
 		Status string
 		Results map[string]interface{}
 	}
-	
-	type Wireless struct {
-		Results struct {
-			BroadbandSource struct {
-				Organization    string `json:"organization"`
-				OrganizationURL string `json:"organizationURL"`
-				StateFips       string `json:"stateFips"`
-			} `json:"broadbandSource"`
-			WirelessServices []struct {
-				DoingBusinessAs      string `json:"doingBusinessAs"`
-				Frn                  string `json:"frn"`
-				HoldingCompanyName   string `json:"holdingCompanyName"`
-				HoldingCompanyNumber string `json:"holdingCompanyNumber"`
-				ProviderName         string `json:"providerName"`
-				ProviderURL          string `json:"providerURL"`
-				Technologies         []struct {
-					DownloadQuality                float32 `json:"downloadQuality"`
-					MaximumAdvertisedDownloadSpeed float32 `json:"maximumAdvertisedDownloadSpeed"`
-					MaximumAdvertisedUploadSpeed   float32 `json:"maximumAdvertisedUploadSpeed"`
-					MaximumDownloadScore           float32 `json:"maximumDownloadScore"`
-					MaximumProviderScore           float32 `json:"maximumProviderScore"`
-					MaximumSpeedScore              float32 `json:"maximumSpeedScore"`
-					MaximumTechnologyScore         float32 `json:"maximumTechnologyScore"`
-					MaximumUploadScore             float32 `json:"maximumUploadScore"`
-					OverallQuality                 float32 `json:"overallQuality"`
-					ProviderQuality                float32 `json:"providerQuality"`
-					SpeedQuality                   float32 `json:"speedQuality"`
-					TechnologyCode                 float32 `json:"technologyCode"`
-					TechnologyQuality              float32 `json:"technologyQuality"`
-					TypicalDownloadSpeed           float32 `json:"typicalDownloadSpeed"`
-					TypicalUploadSpeed             float32 `json:"typicalUploadSpeed"`
-					UploadQuality                  float32 `json:"uploadQuality"`
-				} `json:"technologies"`
-			} `json:"wirelessServices"`
-		} `json:"Results"`
-		Message      []interface{} `json:"message"`
-		ResponseTime float32       `json:"responseTime"`
-		Status       string        `json:"status"`
-	}
 
 	n := string(body[:])
 	
 	dec := json.NewDecoder(strings.NewReader(n))
 	
+	var W []Wireless
+	
 	for {
-		var a Wireless
-		if err := dec.Decode(&a); err == io.EOF {
+		var w Wireless
+		if err := dec.Decode(&w); err == io.EOF {
 			break
 		} else if err != nil {
 			log.Fatal(err)
 		}
-		
-		for k := range a.Results.WirelessServices{
-			fmt.Println(a.Results.WirelessServices[k].DoingBusinessAs)
-			for j := range a.Results.WirelessServices[k].Technologies{
-				fmt.Println(a.Results.WirelessServices[k].Technologies[j].MaximumAdvertisedDownloadSpeed)
-				fmt.Println(a.Results.WirelessServices[k].Technologies[j].MaximumAdvertisedUploadSpeed)
-			}
-		}
+		mongo_i("TEST", w)
+		W = append(W, w)
 	}
-	
 
+	return W
 	
-	return string(body)
 
 }
