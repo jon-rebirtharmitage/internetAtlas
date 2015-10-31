@@ -5,6 +5,8 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"html/template"
     "net/http"
+	"time"
+	"math/rand"
 )
 
 type Page struct {
@@ -12,35 +14,53 @@ type Page struct {
 	Body  string
 }
 
-func (p *Page) GOFUNC(){
-	fmt.Println("HOLY FREAKING CRAP")
+type rPage struct {
+	Title string
+	r []ServiceProvider
 }
 
 func Index(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-    //a := wirelessServiceCall()
-	//b := geocoding()
-    //mongo_i("Test", "Holy shit", "Did this work.")
 	p, _ := loadPage_Index("Awesomesauce")
     t, _ := template.ParseFiles("index.html")
     t.Execute(w, p)
-    //fmt.Fprint(w, "Welcome!\n")
+}
+
+func CreateSessionID() (string){
+	source := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKMNOPQRSTUVWXYZ"
+	rand.Seed(time.Now().UnixNano())
+	s := ""
+	for i := 0; i < 24; i++{
+		s = s + string(source[rand.Intn(52)])
+	}
+	return s
 }
 
 
 func Process(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	s := CreateSessionID()
+	fmt.Println(s)
 	m := parseAddresses(ps.ByName("Value"))
 	for k := range m{
-		b := geocoding(m[k])
-		c := wireServiceCall(b)
-		fmt.Println(c)
+		b := geocoding(s, m[k])
+		wireServiceCall(b, s)
 	} 
+	CreateResults(s)
 }
+
+/* func CreateResults(s string) {
+	r := mongo_o(s)
+	a := ""
+	for i := range r.ServiceProvider{
+		a = a + "<div><p>" + r.ServiceProvider[i].ProviderName + "</p>"
+		for j := range r.ServiceProvider[i].Service{
+			
+		}
+	}
+} */
 
 func loadPage_Index(title string) (*Page, error){
-        return &Page{Title: title, Body: "blank..."}, nil
+    return &Page{Title: title, Body: "blank..."}, nil
 }
-
-
 
 func main() {
 	router := httprouter.New()

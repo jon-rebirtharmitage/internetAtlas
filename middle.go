@@ -56,7 +56,7 @@ type Wireless struct {
 }
 
 
-func geocoding(input address) (geocode){
+func geocoding(session_id string, input address) (geocode){
 	url := "https://maps.googleapis.com/maps/api/geocode/json?address=" + input.street + "," + input.city + "," + input.state + "&key=AIzaSyAd4WHqblWQ2ac4JMf0yOZfBsIkvOlKRQo"
 
 	req, _ := http.NewRequest("GET", url, nil)
@@ -115,16 +115,14 @@ func geocoding(input address) (geocode){
 			fmt.Println(a.Results[k].Geometry.Location.Lng)
 			geo.lat = a.Results[k].Geometry.Location.Lat
 			geo.lng = a.Results[k].Geometry.Location.Lng
+			//mongo_j()
 			return geo
 		}
 	}
-	
-	//fmt.Println(string(body))
-	
 	return geo
 }
 
-func wireServiceCall(input geocode) ([]Wireless){
+func wireServiceCall(input geocode, session_id string){
 
 	a := strconv.FormatFloat(input.lat, 'f', -1, 64)
 	b := strconv.FormatFloat(input.lng, 'f', -1, 64)
@@ -146,7 +144,7 @@ func wireServiceCall(input geocode) ([]Wireless){
 	
 	dec := json.NewDecoder(strings.NewReader(n))
 	
-	var W []Wireless
+	//var W []Wireless
 	
 	for {
 		var w Wireless
@@ -155,11 +153,7 @@ func wireServiceCall(input geocode) ([]Wireless){
 		} else if err != nil {
 			log.Fatal(err)
 		}
-		mongo_i("TEST", w)
-		W = append(W, w)
+		mongo_i(session_id, w)
+		//W = append(W, w)
 	}
-
-	return W
-	
-
 }
