@@ -16,12 +16,12 @@ type Page struct {
 
 type rPage struct {
 	Title string
-	r []ServiceProvider
+	r []string
 }
 
 func Index(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	p, _ := loadPage_Index("Awesomesauce")
-    t, _ := template.ParseFiles("index.html")
+    t, _ := template.ParseFiles("./html/index.html")
     t.Execute(w, p)
 }
 
@@ -47,16 +47,12 @@ func Process(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	CreateResults(s)
 }
 
-/* func CreateResults(s string) {
+func CreateResults(s string) {
 	r := mongo_o(s)
-	a := ""
-	for i := range r.ServiceProvider{
-		a = a + "<div><p>" + r.ServiceProvider[i].ProviderName + "</p>"
-		for j := range r.ServiceProvider[i].Service{
-			
-		}
+	for i := range r{
+		fmt.Println(r[i].Service)
 	}
-} */
+} 
 
 func loadPage_Index(title string) (*Page, error){
     return &Page{Title: title, Body: "blank..."}, nil
