@@ -144,7 +144,7 @@
 							state:""
 						  });
 					} else {
-						alert()
+						alert("Too many targets.")
 					}
 				}
 		
@@ -153,9 +153,10 @@
 				if ($scope.items.length < 10){
 					for(var i = 0; i < $scope.items.length; i++) {
 						str = str + "`" + $scope.items[i].address + "`" + $scope.items[i].city + "`" + $scope.items[i].state + "~";
-						//alert(str);
 					}
-					$.get("http://www.rebirtharmitage.com:8081/Process/" + str);
+					$.post(("http://www.rebirtharmitage.com:8081/Process/" + str), "", function(data, status){
+							window.location.replace("http://rebirtharmitage.com:8081/Results/" + data);
+					});
 				}
 			}
       }
