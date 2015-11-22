@@ -13,6 +13,7 @@ import (
 
 type geocode struct{
 	lat, lng float64
+	add string
 }
 
 type Wireless struct {
@@ -53,6 +54,11 @@ type Wireless struct {
 	Message      []interface{} `json:"message"`
 	ResponseTime int           `json:"responseTime"`
 	Status       string        `json:"status"`
+}
+
+type Signal struct{
+	W []Wireless
+	id string
 }
 
 
@@ -115,6 +121,7 @@ func geocoding(session_id string, input address) (geocode){
 			fmt.Println(a.Results[k].Geometry.Location.Lng)
 			geo.lat = a.Results[k].Geometry.Location.Lat
 			geo.lng = a.Results[k].Geometry.Location.Lng
+			geo.add = a.Results[k].FormattedAddress
 			//mongo_j()
 			return geo
 		}
@@ -126,8 +133,9 @@ func wireServiceCall(input geocode, session_id string){
 
 	a := strconv.FormatFloat(input.lat, 'f', -1, 64)
 	b := strconv.FormatFloat(input.lng, 'f', -1, 64)
+	d := input.add
 	url := "http://www.broadbandmap.gov/broadbandmap/broadband/jun2014/wireline?latitude=" + a + "&longitude=" + b + "&format=json"
-	fmt.Println(url)
+	
 	req, _ := http.NewRequest("GET", url, nil)
 
 	res, _ := http.DefaultClient.Do(req)
@@ -144,7 +152,7 @@ func wireServiceCall(input geocode, session_id string){
 	
 	dec := json.NewDecoder(strings.NewReader(n))
 	
-	//var W []Wireless
+	var W []Wireless
 	
 	for {
 		var w Wireless
@@ -153,7 +161,11 @@ func wireServiceCall(input geocode, session_id string){
 		} else if err != nil {
 			log.Fatal(err)
 		}
-		mongo_i(session_id, w)
-		//W = append(W, w)
+		//mongo_i(session_id, w)
+		W = append(W, w)
 	}
+	var sig Signal
+	sig.W = W
+	sig.id = d
+	mongo_i(session_id, sig)
 }

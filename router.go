@@ -2,19 +2,17 @@ package main
 
 import (
 	"fmt"
-	//"github.com/julienschmidt/httprouter"
 	"github.com/gorilla/mux"
 	"html/template"
-    "net/http"
+  "net/http"
 	"time"
 	"math/rand"
-	//"strconv"
 )
 
 type Page struct {
 	Title string
 	Body  string
-	R []ServiceProvider
+	R []ServiceList
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -52,10 +50,10 @@ func CreateResults(w http.ResponseWriter, r *http.Request){
 	s := vars["Session"]
 	result := mongo_o(s)
 	p, _ := loadPage_Results("OMFG", result)
-    renderTemplate(w, "./html/results", p)
+  renderTemplate(w, "./html/results", p)
 } 
 
-func loadPage_Results(session_id string, results []ServiceProvider) (*Page, error){
+func loadPage_Results(session_id string, results []ServiceList) (*Page, error){
 	return &Page{Title: session_id, R: results}, nil
 }
 
@@ -64,11 +62,11 @@ func loadPage_Index(title string) (*Page, error){
 }
 
 func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
-    t, err := template.ParseFiles(tmpl + ".html")
+  t, err := template.ParseFiles(tmpl + ".html")
 	if err != nil{
-		fmt.Println("THIS DONE FUCKED UP!", err)
+		fmt.Println("Error in loading template file.", err)
 	}
-    t.Execute(w, p)
+  t.Execute(w, p)
 }
 
 /*
@@ -80,9 +78,7 @@ func main() {
 	router.HandleFunc("/", Index)
 	router.HandleFunc("/Process/{Value}", Process)
 	router.HandleFunc("/Results/{Session}", CreateResults)
-
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("../internetatlas/")))
-	
 	http.Handle("/", router)
 	http.ListenAndServe(":8081", nil)
 }
