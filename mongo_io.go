@@ -19,21 +19,6 @@ type ServiceList struct {
 	Sp []ServiceProvider
 }
 
-var DECODER []string
-DECODER[0] = "Unknown"
-DECODER[1] = "200 kbps"
-DECODER[2] = "768 kbps"
-DECODER[3] = "1.5 mbps"
-DECODER[4] = "3 mbps"
-DECODER[5] = "6 mbps"
-DECODER[6] = "10 mbps"
-DECODER[7] = "25 mbps"
-DECODER[8] = "50 mbps"
-DECODER[9] = "100 mbps"
-DECODER[10] = "1 gbps"
-DECODER[11] = "Greater than 1 gbps"
-
-
 func mongo_o(session_id string)([]ServiceList){
 	//var sp []ServiceProvider
 	
