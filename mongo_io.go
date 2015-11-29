@@ -11,6 +11,7 @@ import (
 type ServiceProvider struct{
 	ProviderName, ProviderURL string
 	Service []float32
+	Descript []string
 }
 
 type ServiceList struct {
@@ -62,27 +63,81 @@ func mongo_i(session_id string, sig Signal){
 	top = 0.0
 	
 	for h := range sig.W {
-			var spl []ServiceProvider
+			//var spl []ServiceProvider
 			var sp ServiceProvider
-
 			for i := range sig.W[h].Results.WirelineServices {
 				sp.ProviderName = sig.W[h].Results.WirelineServices[i].ProviderName
 				sp.ProviderURL = sig.W[h].Results.WirelineServices[i].ProviderURL
 				for j := range sig.W[h].Results.WirelineServices[i].Technologies{
 					sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode)
+					sp.Descript = append(sp.Descript, TechCode(sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode))
 					sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].DownloadQuality)
+					sp.Descript = append(sp.Descript, "PlaceHolder")
 					sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].MaximumAdvertisedDownloadSpeed)
+					sp.Descript = append(sp.Descript, DownCode(sig.W[h].Results.WirelineServices[i].Technologies[j].MaximumAdvertisedDownloadSpeed))
 					sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].MaximumAdvertisedUploadSpeed)
+					sp.Descript = append(sp.Descript, DownCode(sig.W[h].Results.WirelineServices[i].Technologies[j].MaximumAdvertisedUploadSpeed))
 					if (sig.W[h].Results.WirelineServices[i].Technologies[j].MaximumAdvertisedDownloadSpeed > top){
 						top = sig.W[h].Results.WirelineServices[i].Technologies[j].MaximumAdvertisedDownloadSpeed
 					}
 				}
-				spl = append(spl, sp)
+				Extend(sp)
 				sp.Service = sp.Service[:0]
+				sp.Descript = sp.Descript[:0]
 			}
-
-		c.Insert(bson.M{"name":sig.id, "upper":top , "sp": spl})
+		c.Insert(bson.M{"name":sig.id, "upper":top , "sp": SPL})
+		
 	}
+	SPL = SPL[:0]
+}
+
+var SPL []ServiceProvider
+
+func Extend(sp ServiceProvider) {
+	fmt.Println(sp)
+	SPL = append(SPL, sp)
+}
+
+func TechCode(i float32) (string){
+	if i == 30 {
+		return "DSL"
+	}else if i == 40 {
+		return "Cable"
+	}else if i == 40 {
+		return "Cable"
+	}else if i == 50 {
+		return "Optical Fiber"
+	}else if i == 10 {
+		return "DSL"
+	}
+	return "Unknown"
+}
+
+func DownCode(i float32) (string){
+	if i == 1{
+		return "200 kbps"
+	}else if i == 2{
+		return "768 kbps"
+	}else if i == 3{
+		return "1.5 mbps"
+	}else if i == 4{
+		return "3 mbps"
+	}else if i == 5{
+		return "6 mbps"
+	}else if i == 6{
+		return "10 mbps"
+	}else if i == 7{
+		return "25 mbps"
+	}else if i == 8{
+		return "50 mbps"
+	}else if i == 9{
+		return "100 mbps"
+	}else if i == 10{
+		return "1 gbps"
+	}else if i == 11{
+		return "Over 1 gbps"
+	}
+	return "Unknown"
 }
 
 func mongo_j(session_id string, id string, value geocode){

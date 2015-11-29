@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html class="full" lang="en" ng-app>
 <!-- Make sure the <html> tag is set to the .full CSS class. Change the background image in the full.css file. -->
@@ -7,78 +8,76 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Internet Atlas : Find your best internet.">
+    <meta name="author" content="Rebirth Armitage Studios">
 
     <title>{{.Title}}</title>
 
     <!-- Bootstrap Core CSS -->
-    <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+		<script src="js/bootstrap.min.js"></script>
+		<script src="jQueryAssets/jquery-1.11.1.min.js" type="text/javascript"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
+	
+		<style>
+			@font-face {
+				font-family: RA;
+				src: url('fonts/CG.otf');
+			}
 
-	<!-- Optional theme -->
-	<link href="jQueryAssets/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
-	<link href="jQueryAssets/jquery.ui.theme.min.css" rel="stylesheet" type="text/css">
-	<link href="jQueryAssets/jquery.ui.progressbar.min.css" rel="stylesheet" type="text/css">
+			@import url(https://fonts.googleapis.com/css?family=PT+Sans);
 
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
-
-    <!-- Custom CSS -->
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-	<script src="jQueryAssets/jquery-1.11.1.min.js" type="text/javascript"></script>
-    <script src="jQueryAssets/jquery.ui-1.10.4.progressbar.min.js" type="text/javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
-    <!-- Gov APO Key  bhnKf81FrVPMHpmGw3QYgC3TsovarLZl0qlS6X3k -->
+			body {
+				margin-top: 50px;
+				margin-bottom: 50px;
+				background: none;
+				color:white;
+				font-family: RA;
+			}
+			
+			footer{ position: fixed; bottom: 0; right: 0; margin-right: 250px;}
+			
+			.full {
+				background: url('img/int4.png') no-repeat center center fixed; 
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			.macro-buffered{
+				margin-top:25px;
+				min-width:300px;
+				max-width: 210px;
+			}
+			.buffered{
+				margin-top:25px;
+				min-width:175px;
+			}
+			.micro-buffered{
+				margin-top:25px;
+				max-width:75px;
+			}
+			.input-side {
+				font-family: 'PT Sans', sans-serif;
+			}
+			.modal{
+				font-family: 'PT Sans', sans-serif;
+				color: #333333;
+			}
+			
+			.modal-header{
+				background: #3399cc;
+			}
+			
+		</style>
 </head>
 
-<style>
-	@font-face {
-		font-family: Biko;
-		src: url('fonts/CG.otf');
-	}
-
-	@import url(https://fonts.googleapis.com/css?family=PT+Sans);
-
-	body {
-		margin-top: 50px;
-		margin-bottom: 50px;
-		background: none;
-		color:white;
-		font-family: Biko;
-	}
-	.full {
-	  background: url('img/int4.png') no-repeat center center fixed; 
-	  -webkit-background-size: cover;
-	  -moz-background-size: cover;
-	  -o-background-size: cover;
-	  background-size: cover;
-	}
-	.macro-buffered{
-		margin-top:25px;
-		min-width:300px;
-		max-width: 210px;
-	}
-	.buffered{
-		margin-top:25px;
-		min-width:175px;
-	}
-	.micro-buffered{
-		margin-top:25px;
-		max-width:75px;
-	}
-	.input-side {
-		font-family: 'PT Sans', sans-serif;
-	}
-</style>
-
-<body>
+<body >
 
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->  
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container" >
+            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -86,29 +85,30 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">InternetAtlas.io</a>
+                <a class="navbar-brand" href="/Index">Internet Atlas</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a href="#" data-toggle="modal" data-target="#how">How to Use</a>
                     </li>
                     <li>
-                        <a href="#">Legals</a>
+                        <a href="#" data-toggle="modal" data-target="#about">About</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a  href="#" data-toggle="modal" data-target="#contact">Contact</a>
                     </li>
+										<li>
+
+										</li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container -->
     </nav>
-
-    <!-- Page Content -->
-    <div class="container" ng-controller="Note">
+	
+   <div class="container" ng-controller="Note">
         <div class="row">
           <div class="col-md-6 col-sm-12">
                 <h1 class="header1">Internet Atlas</h1>
@@ -129,38 +129,109 @@
                       </div>
            	 	 </form>
       		</div>
-		</div>
+				</div>
     </div>
 	
-	<script type="text/javascript">
+	<div id="how" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title">How to Use</h4>
+				</div>
+				<div class="modal-body">
+					<p>To use this site simply click on the Add Address button to add in locations you want to check on available internet speeds.    Then once you have entered in all the ones you want (
+						up to 9 at a time) then you click Compare and it will compare adn load the results for you.    This will work with only 1 address if you only want to check the one as well..</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	<div id="about" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title">About</h4>
+				</div>
+				<div class="modal-body">
+					<p>This is a pet projet that I started after reading an Arstechnica article about a man in California who had to move from his home because the internet he could get could not support his 
+					remote work based job.     Since I would never move somewhere without internet speeds capable of running all the internets I figured why should anybody else.   So if you are looking to move
+					and you want to make sure you don't have to sacrifice your Call of Duty link rate to someone else in the house playing on Netflix then use this site to insure the internet you need is where 
+					you are going.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	<div id="contact" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title">Contact Us</h4>
+				</div>
+				<div class="modal-body">
+					<p>I truly appreciate any feedback on this project as this is apprecaited.  This is my first real ventrue in using Golang, Angular JS, and MongoDB in a unified project.</p>
+					<a href="mailto:jon@rebirtharmitage.com">Email Me Here</a> 
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+	
+		<script type="text/javascript">
 		
-		var Note = function($scope){
-        	$scope.items = [];
-				$scope.add = function () {
-					if ($scope.items.length < 9) {
-						$scope.items.push({ 
-							address: "",
-							city:"",
-							state:""
-						  });
-					} else {
-						alert("Too many targets.")
+			var Note = function($scope){
+						$scope.items = [];
+						$scope.add = function () {
+							if ($scope.items.length < 9) {
+								$scope.items.push({ 
+									address: "",
+									city:"",
+									state:""
+									});
+							} else {
+								alert("Too many targets.")
+							}
+						}
+
+					$scope.res = function () {
+						var str = "";
+						if ($scope.items.length < 10){
+							for(var i = 0; i < $scope.items.length; i++) {
+								str = str + "`" + $scope.items[i].address + "`" + $scope.items[i].city + "`" + $scope.items[i].state + "~";
+							}
+							$.post(("http://www.rebirtharmitage.com:8081/Process/" + str), "", function(data, status){
+									window.location.replace("http://rebirtharmitage.com:8081/Results/" + data);
+							});
+						}
 					}
 				}
-		
-			$scope.res = function () {
-				var str = "";
-				if ($scope.items.length < 10){
-					for(var i = 0; i < $scope.items.length; i++) {
-						str = str + "`" + $scope.items[i].address + "`" + $scope.items[i].city + "`" + $scope.items[i].state + "~";
-					}
-					$.post(("http://www.rebirtharmitage.com:8081/Process/" + str), "", function(data, status){
-							window.location.replace("http://rebirtharmitage.com:8081/Results/" + data);
-					});
-				}
-			}
-      }
     </script>
 
 </body>
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Rebirth Armitage Studios 2016</p>
+										<a href="http://www.rebirtharmitage.com">Developer's Website</a>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
 </html>

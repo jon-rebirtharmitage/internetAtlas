@@ -53,6 +53,15 @@ func CreateResults(w http.ResponseWriter, r *http.Request){
   renderTemplate(w, "./html/results", p)
 } 
 
+func DisplayDetails(w http.ResponseWriter, r *http.Request){
+		p, _ := loadPage_Details("Awesome")
+    renderTemplate(w, "./html/details", p)
+}
+
+func loadPage_Details(title string) (*Page, error){
+	return &Page{Title: title, Body: "blank..."}, nil
+}
+
 func loadPage_Results(session_id string, results []ServiceList) (*Page, error){
 	return &Page{Title: session_id, R: results}, nil
 }
@@ -78,6 +87,7 @@ func main() {
 	router.HandleFunc("/", Index)
 	router.HandleFunc("/Process/{Value}", Process)
 	router.HandleFunc("/Results/{Session}", CreateResults)
+	router.HandleFunc("/Details", DisplayDetails)
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("../internetatlas/")))
 	http.Handle("/", router)
 	http.ListenAndServe(":8081", nil)
