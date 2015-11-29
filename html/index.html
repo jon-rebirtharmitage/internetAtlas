@@ -216,8 +216,8 @@
 							for(var i = 0; i < $scope.items.length; i++) {
 								str = str + "`" + $scope.items[i].address + "`" + $scope.items[i].city + "`" + $scope.items[i].state + "~";
 							}
-							$.post(("http://www.internetatlas.co:8080/Process/" + str), "", function(data, status){
-									window.location.replace("http://www.internetatlas.co:8080/Results/" + data);
+							$.post(("http://www.internetatlas.co/Process/" + str), "", function(data, status){
+									window.location.replace("http://www.internetatlas.co/Results/" + data);
 							});
 						}
 					}
