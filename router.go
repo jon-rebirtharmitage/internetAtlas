@@ -16,7 +16,7 @@ type Page struct {
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	p, _ := loadPage_Index("Awesome")
+	p, _ := loadPage_Index("Internet Atlas IO")
     renderTemplate(w, "./html/index", p)
 }
 
@@ -90,5 +90,5 @@ func main() {
 	router.HandleFunc("/Details", DisplayDetails)
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("../internetatlas/")))
 	http.Handle("/", router)
-	http.ListenAndServe(":8081", nil)
+	http.ListenAndServe(":8080", nil)
 }
