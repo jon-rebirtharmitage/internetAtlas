@@ -103,10 +103,10 @@ func TechCode(i float32) (string){
 		return "DSL"
 	}else if i == 40 {
 		return "Cable"
-	}else if i == 40 {
-		return "Cable"
+	}else if i == 41 {
+		return "Fiber"
 	}else if i == 50 {
-		return "Optical Fiber"
+		return "Cable"
 	}else if i == 10 {
 		return "DSL"
 	}
