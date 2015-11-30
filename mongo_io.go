@@ -90,11 +90,10 @@ func mongo_i(session_id string, sig Signal){
 				Extend(sp)
 				sp.Service = sp.Service[:0]
 				sp.Descript = sp.Descript[:0]
-				CurrentTechCode = 0
-				top = 0
 			}
 		c.Insert(bson.M{"name":sig.id, "upper":top , "sp": SPL})
-		
+		top = 0
+		CurrentTechCode = 0
 	}
 	SPL = SPL[:0]
 }
