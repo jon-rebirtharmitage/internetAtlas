@@ -134,7 +134,7 @@ func wireServiceCall(input geocode, session_id string){
 	a := strconv.FormatFloat(input.lat, 'f', -1, 64)
 	b := strconv.FormatFloat(input.lng, 'f', -1, 64)
 	d := input.add
-	url := "http://www.broadbandmap.gov/broadbandmap/broadband/jun2013/wireline?latitude=" + a + "&longitude=" + b + "&format=json"
+	url := "http://www.broadbandmap.gov/broadbandmap/broadband/jun2014/wireline?latitude=" + a + "&longitude=" + b + "&format=json"
 	
 	req, _ := http.NewRequest("GET", url, nil)
 
