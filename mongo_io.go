@@ -61,7 +61,8 @@ func mongo_i(session_id string, sig Signal){
 	
 	var top float32
 	top = 0.0
-	CurrentTechCode := 0.0
+	var CurrentTechCode float32
+	CurrentTechCode = 0.0
 	
 	for h := range sig.W {
 			//var spl []ServiceProvider
