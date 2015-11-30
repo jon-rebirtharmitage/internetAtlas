@@ -72,6 +72,7 @@ func mongo_i(session_id string, sig Signal){
 				sp.ProviderURL = sig.W[h].Results.WirelineServices[i].ProviderURL
 				for j := range sig.W[h].Results.WirelineServices[i].Technologies{
 					if (sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode > CurrentTechCode){
+						sp.Service = sp.Service[:0]
 						sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode)
 						sp.Descript = append(sp.Descript, TechCode(sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode))
 						sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].DownloadQuality)
@@ -85,7 +86,6 @@ func mongo_i(session_id string, sig Signal){
 						}
 						CurrentTechCode = sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode
 					}
-
 				}
 				Extend(sp)
 				sp.Service = sp.Service[:0]
