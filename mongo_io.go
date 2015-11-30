@@ -73,12 +73,12 @@ func mongo_i(session_id string, sig Signal){
 					sp.Descript = append(sp.Descript, TechCode(sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode))
 					sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].DownloadQuality)
 					sp.Descript = append(sp.Descript, "PlaceHolder")
-					sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].typicalDownloadSpeed)
-					sp.Descript = append(sp.Descript, DownCode(sig.W[h].Results.WirelineServices[i].Technologies[j].typicalDownloadSpeed))
-					sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].typicalUploadSpeed)
-					sp.Descript = append(sp.Descript, DownCode(sig.W[h].Results.WirelineServices[i].Technologies[j].typicalUploadSpeed))
-					if (sig.W[h].Results.WirelineServices[i].Technologies[j].typicalDownloadSpeed > top){
-						top = sig.W[h].Results.WirelineServices[i].Technologies[j].typicalDownloadSpeed
+					sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed)
+					sp.Descript = append(sp.Descript, DownCode(sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed))
+					sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalUploadSpeed)
+					sp.Descript = append(sp.Descript, DownCode(sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalUploadSpeed))
+					if (sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed > top){
+						top = sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed
 					}
 				}
 				Extend(sp)
