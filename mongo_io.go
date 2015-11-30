@@ -61,6 +61,7 @@ func mongo_i(session_id string, sig Signal){
 	
 	var top float32
 	top = 0.0
+	CurrentTechCode := 0.0
 	
 	for h := range sig.W {
 			//var spl []ServiceProvider
@@ -69,21 +70,27 @@ func mongo_i(session_id string, sig Signal){
 				sp.ProviderName = sig.W[h].Results.WirelineServices[i].ProviderName
 				sp.ProviderURL = sig.W[h].Results.WirelineServices[i].ProviderURL
 				for j := range sig.W[h].Results.WirelineServices[i].Technologies{
-					sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode)
-					sp.Descript = append(sp.Descript, TechCode(sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode))
-					sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].DownloadQuality)
-					sp.Descript = append(sp.Descript, "PlaceHolder")
-					sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed)
-					sp.Descript = append(sp.Descript, DownCode(sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed))
-					sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalUploadSpeed)
-					sp.Descript = append(sp.Descript, DownCode(sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalUploadSpeed))
-					if (sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed > top){
-						top = sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed
+					if (sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode > CurrentTechCode){
+						sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode)
+						sp.Descript = append(sp.Descript, TechCode(sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode))
+						sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].DownloadQuality)
+						sp.Descript = append(sp.Descript, "PlaceHolder")
+						sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed)
+						sp.Descript = append(sp.Descript, DownCode(sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed))
+						sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalUploadSpeed)
+						sp.Descript = append(sp.Descript, DownCode(sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalUploadSpeed))
+						if (sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed > top){
+							top = sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed
+						}
+						CurrentTechCode = sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode
 					}
+
 				}
 				Extend(sp)
 				sp.Service = sp.Service[:0]
 				sp.Descript = sp.Descript[:0]
+				CurrentTechCode = 0
+				top = 0
 			}
 		c.Insert(bson.M{"name":sig.id, "upper":top , "sp": SPL})
 		
