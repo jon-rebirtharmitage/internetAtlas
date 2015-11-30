@@ -73,12 +73,12 @@ func mongo_i(session_id string, sig Signal){
 					sp.Descript = append(sp.Descript, TechCode(sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode))
 					sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].DownloadQuality)
 					sp.Descript = append(sp.Descript, "PlaceHolder")
-					sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].MaximumAdvertisedDownloadSpeed)
-					sp.Descript = append(sp.Descript, DownCode(sig.W[h].Results.WirelineServices[i].Technologies[j].MaximumAdvertisedDownloadSpeed))
-					sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].MaximumAdvertisedUploadSpeed)
-					sp.Descript = append(sp.Descript, DownCode(sig.W[h].Results.WirelineServices[i].Technologies[j].MaximumAdvertisedUploadSpeed))
-					if (sig.W[h].Results.WirelineServices[i].Technologies[j].MaximumAdvertisedDownloadSpeed > top){
-						top = sig.W[h].Results.WirelineServices[i].Technologies[j].MaximumAdvertisedDownloadSpeed
+					sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].typicalDownloadSpeed)
+					sp.Descript = append(sp.Descript, DownCode(sig.W[h].Results.WirelineServices[i].Technologies[j].typicalDownloadSpeed))
+					sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].typicalUploadSpeed)
+					sp.Descript = append(sp.Descript, DownCode(sig.W[h].Results.WirelineServices[i].Technologies[j].typicalUploadSpeed))
+					if (sig.W[h].Results.WirelineServices[i].Technologies[j].typicalDownloadSpeed > top){
+						top = sig.W[h].Results.WirelineServices[i].Technologies[j].typicalDownloadSpeed
 					}
 				}
 				Extend(sp)
@@ -115,25 +115,25 @@ func TechCode(i float32) (string){
 
 func DownCode(i float32) (string){
 	if i == 1{
-		return "200 kbps"
+		return "Up to  200 kbps"
 	}else if i == 2{
-		return "768 kbps"
+		return "Up to 768 kbps"
 	}else if i == 3{
-		return "1.5 mbps"
+		return "Up to 1.5 mbps"
 	}else if i == 4{
-		return "3 mbps"
+		return "Up to 3 mbps"
 	}else if i == 5{
-		return "6 mbps"
+		return "Up to 6 mbps"
 	}else if i == 6{
-		return "10 mbps"
+		return "Up to 10 mbps"
 	}else if i == 7{
-		return "25 mbps"
+		return "Up to 25 mbps"
 	}else if i == 8{
-		return "50 mbps"
+		return "Up to 50 mbps"
 	}else if i == 9{
-		return "100 mbps"
+		return "Up to 100 mbps"
 	}else if i == 10{
-		return "1 gbps"
+		return "Up to 1 gbps"
 	}else if i == 11{
 		return "Over 1 gbps"
 	}
