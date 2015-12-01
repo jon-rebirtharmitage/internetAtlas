@@ -11,6 +11,7 @@ import (
 type ServiceProvider struct{
 	ProviderName, ProviderURL string
 	TechnologyCode, Download, Upload, Rating float32
+	TechnologyCode_S, Download_S, Upload_S, Rating_S string
 }
 
 type ServiceList struct {
@@ -72,11 +73,15 @@ func mongo_i(session_id string, sig Signal){
 				for j := range sig.W[h].Results.WirelineServices[i].Technologies{
 					if (sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode > CurrentTechCode){
 						sp.TechnologyCode = sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode
-						sp.Download = sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed
-						sp.Upload = sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalUploadSpeed
-						sp.Rating = "Placeholder"
-						if (sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed > top){
-							top = sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed
+						sp.TechnologyCode_S = TechCode(sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode)
+						sp.Download = sig.W[h].Results.WirelineServices[i].Technologies[j].MaximumAdvertisedDownloadSpeed
+						sp.Download_S = DownCode(sig.W[h].Results.WirelineServices[i].Technologies[j].MaximumAdvertisedDownloadSpeed)
+						sp.Upload = sig.W[h].Results.WirelineServices[i].Technologies[j].MaximumAdvertisedUploadSpeed
+						sp.Upload_S = DownCode(sig.W[h].Results.WirelineServices[i].Technologies[j].MaximumAdvertisedUploadSpeed)
+						sp.Rating = 0
+						sp.Rating_S = "Placeholder"
+						if (sig.W[h].Results.WirelineServices[i].Technologies[j].MaximumAdvertisedDownloadSpeed > top){
+							top = sig.W[h].Results.WirelineServices[i].Technologies[j].MaximumAdvertisedDownloadSpeed
 						}
 						CurrentTechCode = sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode
 					}
