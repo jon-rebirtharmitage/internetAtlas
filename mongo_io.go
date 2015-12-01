@@ -10,8 +10,7 @@ import (
 
 type ServiceProvider struct{
 	ProviderName, ProviderURL string
-	Service []float32
-	Descript []string
+	TechnologyCode, Download, Upload, Rating float32
 }
 
 type ServiceList struct {
@@ -72,15 +71,10 @@ func mongo_i(session_id string, sig Signal){
 				sp.ProviderURL = sig.W[h].Results.WirelineServices[i].ProviderURL
 				for j := range sig.W[h].Results.WirelineServices[i].Technologies{
 					if (sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode > CurrentTechCode){
-						sp.Service = sp.Service[:0]
-						sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode)
-						sp.Descript = append(sp.Descript, TechCode(sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode))
-						sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].DownloadQuality)
-						sp.Descript = append(sp.Descript, "PlaceHolder")
-						sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed)
-						sp.Descript = append(sp.Descript, DownCode(sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed))
-						sp.Service = append(sp.Service, sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalUploadSpeed)
-						sp.Descript = append(sp.Descript, DownCode(sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalUploadSpeed))
+						sp.TechnologyCode = sig.W[h].Results.WirelineServices[i].Technologies[j].TechnologyCode
+						sp.Download = sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed
+						sp.Upload = sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalUploadSpeed
+						sp.Rating = "Placeholder"
 						if (sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed > top){
 							top = sig.W[h].Results.WirelineServices[i].Technologies[j].TypicalDownloadSpeed
 						}
@@ -88,13 +82,10 @@ func mongo_i(session_id string, sig Signal){
 					}
 				}
 				Extend(sp)
-				sp.Service = sp.Service[:0]
-				sp.Descript = sp.Descript[:0]
 				CurrentTechCode = 0
 			}
 		c.Insert(bson.M{"name":sig.id, "upper":top , "sp": SPL})
 		top = 0
-		
 	}
 	SPL = SPL[:0]
 }
