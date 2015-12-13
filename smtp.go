@@ -41,7 +41,7 @@ func SendMail(to []string, subject string, msg string) error {
 	return nil
 }
 
-func main(){
+func smtp_main(){
 	b := []string{"jon@rebirtharmitage.com"}
 	a := SendMail(b, "Subject", "This is my message.")
 	fmt.Println(a)

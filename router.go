@@ -44,6 +44,25 @@ func Process(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, s)
 }
 
+func email(response http.ResponseWriter, request *http.Request) {
+	name := request.FormValue("name")
+	if (name == ""){ name = "NO NAME"}
+	email := request.FormValue("email")
+	if (email == ""){ email = "NO EMAIL"}
+	phone := request.FormValue("phone")
+	if (phone == ""){ phone = "NO PHONE"}
+	body := request.FormValue("body")
+	if (body == ""){ body = "NO MESSAGE"}
+	a := sendMail([]string{"jon@rebirtharmitage.com"}, email + " : " + phone, body)
+	if (a == nil){
+		redirectTarget := "/"
+		http.Redirect(response, request, redirectTarget, 302)
+	}else{
+		redirectTarget := "/"
+		http.Redirect(response, request, redirectTarget, 302)
+	}
+}
+
 func CreateResults(w http.ResponseWriter, r *http.Request){
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	vars := mux.Vars(r)
