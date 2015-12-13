@@ -53,7 +53,7 @@ func email(response http.ResponseWriter, request *http.Request) {
 	if (phone == ""){ phone = "NO PHONE"}
 	body := request.FormValue("body")
 	if (body == ""){ body = "NO MESSAGE"}
-	a := sendMail([]string{"jon@rebirtharmitage.com"}, email + " : " + phone, body)
+	a := SendMail([]string{"jon@rebirtharmitage.com"}, email + " : " + phone, body)
 	if (a == nil){
 		redirectTarget := "/"
 		http.Redirect(response, request, redirectTarget, 302)
