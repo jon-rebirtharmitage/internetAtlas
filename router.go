@@ -104,6 +104,7 @@ var router = mux.NewRouter()
 
 func main() {
 	router.HandleFunc("/", Index)
+	router.HandleFunc("/sendmail", email).Methods("POST")
 	router.HandleFunc("/Process/{Value}", Process)
 	router.HandleFunc("/Results/{Session}", CreateResults)
 	router.HandleFunc("/Details", DisplayDetails)
