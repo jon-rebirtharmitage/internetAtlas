@@ -23,7 +23,7 @@ type ServiceList struct {
 func mongo_o(session_id string)([]ServiceList){
 	//var sp []ServiceProvider
 	
-	session, err := mgo.Dial("vpn.rebirtharmitage.com:21701")
+	session, err := mgo.Dial("vps.rebirtharmitage.com:21701")
 	if err != nil {
 			panic(err)
 	}
@@ -48,7 +48,7 @@ func mongo_o(session_id string)([]ServiceList){
 
 func mongo_i(session_id string, sig Signal){
         
-	session, err := mgo.Dial("vpn.rebirtharmitage.com:21701")
+	session, err := mgo.Dial("vps.rebirtharmitage.com:21701")
 	if err != nil {
 			panic(err)
 	}
@@ -145,7 +145,7 @@ func DownCode(i float32) (string){
 }
 
 func mongo_j(session_id string, id string, value geocode){
-	    session, err := mgo.Dial("vpn.rebirtharmitage.com:21701")
+	    session, err := mgo.Dial("vps.rebirtharmitage.com:21701")
         if err != nil {
                 panic(err)
         }

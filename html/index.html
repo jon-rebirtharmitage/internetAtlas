@@ -1,80 +1,31 @@
-
 <!DOCTYPE html>
 <html class="full" lang="en" ng-app>
-<!-- Make sure the <html> tag is set to the .full CSS class. Change the background image in the full.css file. -->
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Internet Atlas : Find your best internet.">
-    <meta name="author" content="Rebirth Armitage Studios">
-		<link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Internet Atlas : Find your best internet.">
+	<meta name="author" content="Rebirth Armitage Studios">
+	<link rel="icon" href="./img/favicon.ico" type="image/x-icon">
 
-    <title>{{.Title}}</title>
+	<title>{{.Title}}</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-		<script src="js/bootstrap.min.js"></script>
-		<script src="jQueryAssets/jquery-1.11.1.min.js" type="text/javascript"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
-	
-		<style>
-			@font-face {
-				font-family: RA;
-				src: url('fonts/CG.otf');
-			}
+	<!-- Bootstrap Core CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+	<script src="js/bootstrap.min.js"></script>
+	<script src="jQueryAssets/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
 
-			@import url(https://fonts.googleapis.com/css?family=PT+Sans);
+	<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
-			body {
-				margin-top: 50px;
-				margin-bottom: 50px;
-				background: none;
-				color:white;
-				font-family: RA;
-			}
-			
-			footer{ position: fixed; bottom: 0; right: 0; margin-right: 250px;}
-			
-			.full {
-				background: url('img/int4.png') no-repeat center center fixed; 
-				-webkit-background-size: cover;
-				-moz-background-size: cover;
-				-o-background-size: cover;
-				background-size: cover;
-			}
-			.macro-buffered{
-				margin-top:25px;
-				min-width:300px;
-				max-width: 210px;
-			}
-			.buffered{
-				margin-top:25px;
-				min-width:175px;
-			}
-			.micro-buffered{
-				margin-top:25px;
-				max-width:75px;
-			}
-			.input-side {
-				font-family: 'PT Sans', sans-serif;
-			}
-			.modal{
-				font-family: 'PT Sans', sans-serif;
-				color: #333333;
-			}
-			
-			.modal-header{
-				background: #3399cc;
-			}
-			
-		</style>
 </head>
 
-<body >
+<body>
 
+	<!-- Navigation -->
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container" >
@@ -86,193 +37,326 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/Index">Internet Atlas</a>
+                <a class="navbar-brand" href="http://www.internetatlas.co:8080">Internet Atlas</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#" data-toggle="modal" data-target="#how">How to Use</a>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
                     </li>
-                    <li>
-                        <a href="#" data-toggle="modal" data-target="#about">About</a>
+                    <li class="page-scroll">
+                        <a href="#missions">Our Missions</a>
                     </li>
-                    <li>
-                        <a  href="#" data-toggle="modal" data-target="#contact">Contact</a>
+                    <li class="page-scroll">
+                        <a href="#vision">Vision</a>
                     </li>
-										<li>
-
-										</li>
+                    <li class="page-scroll">
+                        <a href="#services">Services</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#contact">Contact</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
-    </nav>
-	
-   <div class="container" ng-controller="Note">
-        <div class="row">
-          <div class="col-md-6 col-sm-12">
-                <h1 class="header1">Internet Atlas</h1>
-                <p>Discover more about your interwebs then just the pipes.</p>
-            </div>
-          <div class="col-md-6 col-sm-12 text-right" >
-            <button ng-click="add()" class="btn btn-primary buffered">Add Address</button>
-            <button type="submit"  ng-click="res()" id="action-button" class="btn btn-primary buffered">Compare</button>
-           </div>
-        </div>  
-            <div class="col-sm-12 input-side">
-              <form class="form-inline col-md-6 col-lg-12" role="form">
-                    <div>
-                        <div class="col-lg-offset-0 col-lg-12 text-center" ng-repeat="item in items">
-                            <input type="text" placeholder="Address" class="form-control macro-buffered" ng-model="item.address">
-                            <input type="text" placeholder="City" class="form-control buffered" ng-model="item.city">
-                            <input type="text" placeholder="State" class="form-control micro-buffered" ng-model="item.state">
-                      </div>
-           	 	 </form>
-      		</div>
-				</div>
-    </div>
-	
-	<div id="how" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h4 class="modal-title">How to Use</h4>
-				</div>
-				<div class="modal-body">
-					<p>To use this site simply click on the Add Address button to add in locations you want to check on available internet speeds.    Then once you have entered in all the ones you want (up to 9 at a time) then you click Compare and it will compare and load the results for you.    This will work with only 1 address if you only want to check the one as well.</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
-	
-	<div id="about" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h4 class="modal-title">About</h4>
-				</div>
-				<div class="modal-body">
-					<p>This is a pet project that I started after reading an Arstechnica article about a man in California who had to move from his home because the internet he could get could not support his remote work based job.     Since I would never move somewhere without internet speeds capable of running all the internets I figured why should anybody else.   So if you are looking to move and you want to make sure you don't have to sacrifice your Call of Duty link rate to someone else in the house playing on Netflix then use this site to insure the internet you need is where you are going.</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
-	
-	<div id="contact" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h4 class="modal-title">Contact Us</h4>
-				</div>
-				<div class="modal-body">
-					<p>I truly appreciate any feedback on this project as this is appreciated.  This is my first real venture in using Golang, Angularjs, and MongoDB in a unified project.</p>
-					    <section id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <form method="post" action="/sendmail">
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Name</label>
-                                <input type="text" class="form-control" placeholder="Name" name="name" required data-validation-required-message="Please enter your name.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Email Address</label>
-                                <input type="email" class="form-control" placeholder="Email Address" name="email" required data-validation-required-message="Please enter your email address.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Phone Number</label>
-                                <input type="tel" class="form-control" placeholder="Phone Number" name="phone" required data-validation-required-message="Please enter your phone number.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Message</label>
-                                <textarea rows="5" class="form-control" placeholder="Message" name="body" required data-validation-required-message="Please enter a message."></textarea>
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <br>
-                        <div id="success"></div>
-                        <div class="row">
-                            <div class="form-group col-xs-12">
-                                <button type="submit" class="btn btn-success btn-lg">Send</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <!-- /.navbar-collapse -->
         </div>
-    </section>
+	</nav>
+
+	<!-- Header -->
+	<header id="top" class="header">
+		<div class="text-vertical-center-a">
+			<h1>Internet Atlas</h1>
+			<h3>Learn more about your internet than the pipes.</h3>
+			<br>
+			<div class="container" ng-controller="Note">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 text-center">
+						<button ng-click="add()" class="btn btn-primary buffered">Add Address</button>
+						<button type="submit" ng-click="res()" id="action-button" class="btn btn-primary buffered">Compare</button>
+					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<div class="col-sm-12 input-side">
+					<form class="form-inline col-md-6 col-lg-12" role="form">
+						<div>
+							<div class="col-lg-offset-0 col-lg-12 text-center" ng-repeat="item in items">
+								<input type="text" placeholder="Address" class="form-control macro-buffered" ng-model="item.address">
+								<input type="text" placeholder="City" class="form-control buffered" ng-model="item.city">
+								<input type="text" placeholder="State" class="form-control micro-buffered" ng-model="item.state">
+							</div>
+					</form>
+					</div>
 				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
+			</div>
+		</div>
+	</header>
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-	
-		<script type="text/javascript">
-		
-			var Note = function($scope){
-						$scope.items = [];
-						$scope.add = function () {
-							if ($scope.items.length < 9) {
-								$scope.items.push({ 
-									address: "",
-									city:"",
-									state:""
-									});
-							} else {
-								alert("Too many targets.")
-							}
-						}
+	<!-- Services -->
+	<!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+	<section id="missions" class="services bg-primary">
+		<div class="container">
+			<div class="row text-center">
+				<div class="col-lg-10 col-lg-offset-1">
+					<h2>Our Mission</h2>
+					<hr class="small">
+					<div class="row">
+						<div class="col-md-3 col-sm-6">
+							<div class="service-item">
+								<span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-cloud fa-stack-1x text-primary"></i>
+                            </span>
+								<h4>
+                                    <strong>Service Name</strong>
+                                </h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+								<a href="#" class="btn btn-light">Learn More</a>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<div class="service-item">
+								<span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-compass fa-stack-1x text-primary"></i>
+                            </span>
+								<h4>
+                                    <strong>Service Name</strong>
+                                </h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+								<a href="#" class="btn btn-light">Learn More</a>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<div class="service-item">
+								<span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-flask fa-stack-1x text-primary"></i>
+                            </span>
+								<h4>
+                                    <strong>Service Name</strong>
+                                </h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+								<a href="#" class="btn btn-light">Learn More</a>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<div class="service-item">
+								<span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-shield fa-stack-1x text-primary"></i>
+                            </span>
+								<h4>
+                                    <strong>Service Name</strong>
+                                </h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+								<a href="#" class="btn btn-light">Learn More</a>
+							</div>
+						</div>
+					</div>
+					<!-- /.row (nested) -->
+				</div>
+				<!-- /.col-lg-10 -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container -->
+	</section>
 
-					$scope.res = function () {
-						var str = "";
-						if ($scope.items.length < 10){
-							for(var i = 0; i < $scope.items.length; i++) {
-								str = str + "`" + $scope.items[i].address + "`" + $scope.items[i].city + "`" + $scope.items[i].state + "~";
-							}
-							$.post(("http://www.internetatlas.co/Process/" + str), "", function(data, status){
-									window.location.replace("http://www.internetatlas.co/Results/" + data);
-							});
-						}
+
+	<!-- About -->
+	<section id="vision" class="about">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 text-center">
+
+				</div>
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container -->
+	</section>
+
+	<!-- Services -->
+	<!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+	<section id="services" class="services bg-primary">
+		<div class="container">
+			<div class="row text-center">
+				<div class="col-lg-10 col-lg-offset-1">
+					<h2>Our Services</h2>
+					<hr class="small">
+					<div class="row">
+						<div class="col-md-3 col-sm-6">
+							<div class="service-item">
+								<span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-cloud fa-stack-1x text-primary"></i>
+                            </span>
+								<h4>
+                                    <strong>Service Name</strong>
+                                </h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+								<a href="#" class="btn btn-light">Learn More</a>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<div class="service-item">
+								<span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-compass fa-stack-1x text-primary"></i>
+                            </span>
+								<h4>
+                                    <strong>Service Name</strong>
+                                </h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+								<a href="#" class="btn btn-light">Learn More</a>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<div class="service-item">
+								<span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-flask fa-stack-1x text-primary"></i>
+                            </span>
+								<h4>
+                                    <strong>Service Name</strong>
+                                </h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+								<a href="#" class="btn btn-light">Learn More</a>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<div class="service-item">
+								<span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-shield fa-stack-1x text-primary"></i>
+                            </span>
+								<h4>
+                                    <strong>Service Name</strong>
+                                </h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+								<a href="#" class="btn btn-light">Learn More</a>
+							</div>
+						</div>
+					</div>
+					<!-- /.row (nested) -->
+				</div>
+				<!-- /.col-lg-10 -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container -->
+	</section>
+
+	<!-- Map -->
+	<section id="contact" class="map">
+		<iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9976.837890724473!2d-91.66247119278535!3d41.975983108597475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1469060747413"></iframe>
+		<br />
+		<small>
+            <a href="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9976.837890724473!2d-91.66247119278535!3d41.975983108597475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1469060747413"></a>
+        </small>
+		</iframe>
+	</section>
+
+	<!-- Footer -->
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-10 col-lg-offset-1 text-center">
+					<p>4326 Armar Dr.<br>Cedar Rapids IA 52403</p>
+					<ul class="list-unstyled">
+						<li><i class="fa fa-phone fa-fw"></i> (319) 555-5555</li>
+						<li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">jon@rebirtharmitage.com</a>
+						</li>
+					</ul>
+					<br>
+					<ul class="list-inline">
+						<li>
+							<a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>
+						</li>
+					</ul>
+					<hr class="small">
+					<p class="text-muted">Copyright &copy; Rebirth Armitage 2014</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- jQuery -->
+	<script src="js/jquery.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src="js/bootstrap.min.js"></script>
+
+	<!-- Custom Theme JavaScript -->
+	<script>
+		// Closes the sidebar menu
+		$("#menu-close").click(function(e) {
+			e.preventDefault();
+			$("#sidebar-wrapper").toggleClass("active");
+		});
+
+		// Opens the sidebar menu
+		$("#menu-toggle").click(function(e) {
+			e.preventDefault();
+			$("#sidebar-wrapper").toggleClass("active");
+		});
+
+		// Scrolls to the selected menu item on the page
+		$(function() {
+			$('a[href*=#]:not([href=#])').click(function() {
+				if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+					var target = $(this.hash);
+					target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+					if (target.length) {
+						$('html,body').animate({
+							scrollTop: target.offset().top
+						}, 1000);
+						return false;
 					}
 				}
-    </script>
+			});
+		});
+	</script>
+
+	<script type="text/javascript">
+		var Note = function($scope) {
+			$scope.items = [];
+			$scope.add = function() {
+				if ($scope.items.length < 4) {
+					$scope.items.push({
+						address: "",
+						city: "",
+						state: ""
+					});
+				} else {
+					alert("Too many targets.")
+				}
+			}
+
+			$scope.res = function() {
+				var str = "";
+				if ($scope.items.length < 10) {
+					for (var i = 0; i < $scope.items.length; i++) {
+						str = str + "`" + $scope.items[i].address + "`" + $scope.items[i].city + "`" + $scope.items[i].state + "~";
+					}
+					$.post(("http://www.internetatlas.co:8081/Process/" + str), "", function(data, status) {
+						window.location.replace("http://www.internetatlas.co:8081/Results/" + data);
+					});
+				}
+			}
+		}
+	</script>
 
 </body>
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Rebirth Armitage Studios 2016</p>
-										<a href="http://www.rebirtharmitage.com">Developer's Website</a>
-                </div>
-            </div>
-            <!-- /.row -->
-        </footer>
+
 </html>

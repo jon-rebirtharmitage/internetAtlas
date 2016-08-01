@@ -110,5 +110,5 @@ func main() {
 	router.HandleFunc("/Details", DisplayDetails)
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("../internetatlas/")))
 	http.Handle("/", router)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8081", nil)
 }
