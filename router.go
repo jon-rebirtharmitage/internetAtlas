@@ -44,6 +44,12 @@ func Process(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, s)
 }
 
+
+func ReturnResults(respond http.ResponseWriter, request *http.Request) {
+	respond.Header().Set("Access-Control-Allow-Origin", "*")
+	respond.WriteHeader(200)
+}
+
 func email(response http.ResponseWriter, request *http.Request) {
 	name := request.FormValue("name")
 	if (name == ""){ name = "NO NAME"}
@@ -107,6 +113,7 @@ func main() {
 	router.HandleFunc("/sendmail", email).Methods("POST")
 	router.HandleFunc("/Process/{Value}", Process)
 	router.HandleFunc("/Results/{Session}", CreateResults)
+	router.HandleFunc("/Getit", ReturnResults)
 	router.HandleFunc("/Details", DisplayDetails)
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("../internetatlas/")))
 	http.Handle("/", router)

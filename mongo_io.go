@@ -1,4 +1,4 @@
- package main
+package main
 
 import (
 	"gopkg.in/mgo.v2"
@@ -29,9 +29,6 @@ func mongo_o(session_id string)([]ServiceList){
 	}
 	defer session.Close()
 
-	// Optional. Switch the session to a monotonic behavior.
-	//session.SetMode(mgo.Monotonic, true)
-
 	c := session.DB("intatl").C(session_id)
 
 	result := []ServiceList{}
@@ -54,7 +51,6 @@ func mongo_i(session_id string, sig Signal){
 	}
 	defer session.Close()
 
-	// Optional. Switch the session to a monotonic behavior.
 	session.SetMode(mgo.Monotonic, true)
 
 	c := session.DB("intatl").C(session_id)
